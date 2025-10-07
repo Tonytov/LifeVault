@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LifeVault</string>
+    
+    <!-- Navigation -->
+    <string name="nav_home">Главная</string>
+    <string name="nav_profile">Профиль</string>
+    <string name="nav_diary">Дневник</string>
+    <string name="nav_achievements">Достижения</string>
+    
+    <!-- Main Screen -->
+    <string name="days_smoke_free">Дней без курения</string>
+    <string name="cigarettes_not_smoked">Не выкурено сигарет</string>
+    <string name="money_saved">Сэкономлено денег</string>
+    <string name="health_improvements">Улучшения здоровья</string>
+    
+    <!-- Profile -->
+    <string name="quit_date">Дата отказа от курения</string>
+    <string name="cigarettes_per_day">Сигарет в день</string>
+    <string name="price_per_pack">Цена за пачку</string>
+    <string name="save_profile">Сохранить</string>
+    
+    <!-- Diary -->
+    <string name="add_entry">Добавить запись</string>
+    <string name="diary_hint">Поделитесь своими мыслями...</string>
+    <string name="save_entry">Сохранить запись</string>
+    
+    <!-- Achievements -->
+    <string name="achievements_title">Ваши достижения</string>
+    <string name="first_day">Первый день</string>
+    <string name="first_week">Первая неделя</string>
+    <string name="first_month">Первый месяц</string>
+    
+    <!-- Common -->
+    <string name="save">Сохранить</string>
+    <string name="cancel">Отмена</string>
+    <string name="delete">Удалить</string>
+    <string name="edit">Редактировать</string>
+</resources>

@@ -1,0 +1,111 @@
+# 📁 LifeVault Backend - Git Ignore
+
+# 🗂️ Зависимости
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 🔧 Сборка
+dist/
+build/
+*.tsbuildinfo
+
+# 🌍 Переменные окружения
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# 📝 Логи
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# 💾 База данных
+*.db
+*.sqlite
+*.sqlite3
+prisma/migrations/
+
+# 🗄️ Backup файлы
+*.bak
+*.backup
+*.sql
+
+# 📱 OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# 🛠️ IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ⚡ Cache
+.cache
+.parcel-cache
+.eslintcache
+
+# 🧪 Тестирование
+coverage/
+.nyc_output
+*.lcov
+
+# 🔄 Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# 📦 Optional npm cache directory
+.npm
+
+# 📊 Аналитика
+.vercel
+.next
+
+# 🚀 PM2
+.pm2
+
+# 🔒 Временные файлы
+*.tmp
+*.temp
+temp/
+tmp/
+
+# 🗂️ Uploads
+uploads/
+public/uploads/
+
+# 📸 Screenshots
+screenshots/
+
+# 🔐 SSL сертификаты
+*.pem
+*.key
+*.crt
+*.csr
+
+# ☁️ Docker
+.dockerignore
+docker-compose.override.yml
+
+# 🎯 Специфичные для проекта
+.lifevault-cache/
+backup/
+exports/
