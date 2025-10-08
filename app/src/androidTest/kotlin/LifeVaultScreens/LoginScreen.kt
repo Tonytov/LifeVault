@@ -24,10 +24,14 @@ class LoginScreen(semanticsProvider: SemanticsNodeInteractionsProvider) :
     }
 
     val loginButton = child<KNode> {
-        hasText("Войти")
+        hasTestTag("loginButton")
     }
 
     val registerLink = child<KNode> {
         hasTestTag("registerLinkButton")
+    }
+
+    val passwordField = child<KNode> {
+        hasTestTag("loginPassword")
     }
 }

@@ -1,7 +1,6 @@
 package Tests
 
 import LifeVaultScreens.LoginScreen
-import LifeVaultScreens.RegistrationScreen
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
@@ -18,5 +17,35 @@ class LoginActivityTest : TestCase (
     val composeTestRule = createAndroidComposeRule<LoginActivity>()
 
     @Test
-fun test
+    fun testLogin() = run {
+        step("Проверяем, что находимся на экране входа") {
+            onComposeScreen<LoginScreen>(composeTestRule) {
+                screenTitle {
+                    assertIsDisplayed()
+                }
+            }
+        }
+        step("Вводим номер телефона") {
+            onComposeScreen<LoginScreen>(composeTestRule) {
+                phoneField {
+                    performTextInput("79999999999")
+                }
+            }
+        }
+        step("Вводим пароль") {
+            onComposeScreen<LoginScreen>(composeTestRule) {
+                passwordField {
+                    performTextInput("11111111")
+                }
+            }
+        }
+        step("Нажимаем кнопку войти") {
+            onComposeScreen<LoginScreen>(composeTestRule) {
+                loginButton {
+                    assertIsDisplayed()
+                    performClick()
+                }
+            }
+        }
+    }
 }

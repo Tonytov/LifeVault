@@ -190,6 +190,7 @@ fun LoginScreen(viewModel: AuthViewModel = hiltViewModel()) {
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(bottom = 24.dp)
+                            .testTag("loginPassword")
                     )
                     
                     // Error Message
@@ -217,6 +218,7 @@ fun LoginScreen(viewModel: AuthViewModel = hiltViewModel()) {
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(56.dp)
+                            .testTag("loginButton")
                     ) {
                         if (uiState.isLoading) {
                             CircularProgressIndicator(
