@@ -17,12 +17,12 @@ import com.quitsmoking.data.model.User
 
 @Database(
     entities = [
-        QuitRecord::class, 
-        UserProfile::class, 
-        Habit::class, 
+        QuitRecord::class,
+        UserProfile::class,
+        Habit::class,
         User::class
     ],
-    version = 5,
+    version = 6,
     exportSchema = false
 )
 @TypeConverters(Converters::class)

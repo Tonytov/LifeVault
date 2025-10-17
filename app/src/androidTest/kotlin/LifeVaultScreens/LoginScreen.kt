@@ -15,10 +15,6 @@ class LoginScreen(semanticsProvider: SemanticsNodeInteractionsProvider) :
         hasText("Вход")
     }
 
-    val welcomeText = child<KNode> {
-        hasText("Добро пожаловать!")
-    }
-
     val phoneField = child<KNode> {
         hasTestTag("authIdNumber")
     }
@@ -33,5 +29,8 @@ class LoginScreen(semanticsProvider: SemanticsNodeInteractionsProvider) :
 
     val passwordField = child<KNode> {
         hasTestTag("loginPassword")
+    }
+    val errorMessage = child<KNode> {
+        hasTestTag("errorMessage")
     }
 }

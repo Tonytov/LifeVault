@@ -201,6 +201,7 @@ fun LoginScreen(viewModel: AuthViewModel = hiltViewModel()) {
                             style = MaterialTheme.typography.bodySmall,
                             textAlign = TextAlign.Center,
                             modifier = Modifier.padding(bottom = 16.dp)
+                                .testTag("errorMessage")
                         )
                     }
                     

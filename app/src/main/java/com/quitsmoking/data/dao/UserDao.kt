@@ -33,4 +33,16 @@ interface UserDao {
     
     @Query("UPDATE users SET lastLoginAt = :loginTime WHERE phoneNumber = :phoneNumber")
     suspend fun updateLastLogin(phoneNumber: String, loginTime: java.time.LocalDateTime)
+
+    @Query("UPDATE users SET isLoggedIn = :isLoggedIn WHERE phoneNumber = :phoneNumber")
+    suspend fun updateLoginStatus(phoneNumber: String, isLoggedIn: Boolean)
+
+    @Query("UPDATE users SET isLoggedIn = 0")
+    suspend fun logoutAllUsers()
+
+    @Query("SELECT * FROM users WHERE isLoggedIn = 1 LIMIT 1")
+    suspend fun getLoggedInUser(): User?
+
+    @Query("SELECT * FROM users WHERE isLoggedIn = 1 LIMIT 1")
+    fun getLoggedInUserFlow(): Flow<User?>
 }

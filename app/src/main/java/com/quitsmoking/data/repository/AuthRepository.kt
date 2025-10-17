@@ -19,15 +19,16 @@ class AuthRepository @Inject constructor(
     private val habitDao: HabitDao
 ) {
     
-    fun getCurrentUser(): Flow<User?> = userDao.getCurrentUserFlow()
-    
+    fun getCurrentUser(): Flow<User?> = userDao.getLoggedInUserFlow()
+
     suspend fun isUserLoggedIn(): Boolean {
-        return userDao.getCurrentUser() != null
+        return userDao.getLoggedInUser() != null
     }
     
     suspend fun login(phoneNumber: String, password: String): Result<User> {
         return try {
-            val user = userDao.getUserByPhone(phoneNumber)
+            val formattedPhone = PhoneValidator.formatPhoneNumber(phoneNumber)
+            val user = userDao.getUserByPhone(formattedPhone)
             if (user == null) {
                 Result.failure(Exception("Пользователь не найден"))
             } else if (!user.isPhoneVerified) {
@@ -35,8 +36,12 @@ class AuthRepository @Inject constructor(
             } else if (user.passwordHash != hashPassword(password)) {
                 Result.failure(Exception("Неверный пароль"))
             } else {
-                userDao.updateLastLogin(phoneNumber, LocalDateTime.now())
-                Result.success(user.copy(lastLoginAt = LocalDateTime.now()))
+                // Выходим из всех других сессий
+                userDao.logoutAllUsers()
+                // Устанавливаем текущего пользователя как залогиненного
+                userDao.updateLoginStatus(formattedPhone, true)
+                userDao.updateLastLogin(formattedPhone, LocalDateTime.now())
+                Result.success(user.copy(lastLoginAt = LocalDateTime.now(), isLoggedIn = true))
             }
         } catch (e: Exception) {
             Result.failure(e)
@@ -105,20 +110,23 @@ class AuthRepository @Inject constructor(
         return try {
             val formattedPhone = PhoneValidator.formatPhoneNumber(phoneNumber)
             val user = userDao.getUserByPhone(formattedPhone)
-            
+
             if (user == null) {
                 return Result.failure(Exception("Пользователь не найден"))
             }
-            
+
             if (user.verificationCode != code) {
                 return Result.failure(Exception("Неверный код подтверждения"))
             }
-            
+
             if (user.verificationCodeExpiry?.isBefore(LocalDateTime.now()) == true) {
                 return Result.failure(Exception("Код подтверждения истек"))
             }
-            
+
             userDao.updatePhoneVerification(formattedPhone, true)
+            // После верификации автоматически логиним пользователя
+            userDao.logoutAllUsers()
+            userDao.updateLoginStatus(formattedPhone, true)
             Result.success(true)
         } catch (e: Exception) {
             Result.failure(e)
@@ -126,9 +134,8 @@ class AuthRepository @Inject constructor(
     }
     
     suspend fun logout() {
-        userDao.deleteAllUsers()
-        userProfileDao.deleteUserProfile()
-        habitDao.deleteAllHabits()
+        // Просто убираем флаг isLoggedIn, не удаляя пользователя
+        userDao.logoutAllUsers()
     }
     
     // Метод для тестирования - удаляет всех пользователей

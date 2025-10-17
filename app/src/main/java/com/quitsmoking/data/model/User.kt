@@ -14,7 +14,8 @@ data class User(
     val verificationCode: String? = null,
     val verificationCodeExpiry: LocalDateTime? = null,
     val createdAt: LocalDateTime = LocalDateTime.now(),
-    val lastLoginAt: LocalDateTime? = null
+    val lastLoginAt: LocalDateTime? = null,
+    val isLoggedIn: Boolean = false
 )
 
 data class AuthState(
