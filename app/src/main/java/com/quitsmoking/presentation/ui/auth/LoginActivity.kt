@@ -60,6 +60,11 @@ fun LoginScreen(viewModel: AuthViewModel = hiltViewModel()) {
     var phoneNumber by remember { mutableStateOf(TextFieldValue("")) }
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
+
+    // Валидация полей
+    val isPhoneValid = PhoneValidator.isValidPhone(phoneNumber.text)
+    val isPasswordValid = password.length >= 8
+    val isFormValid = isPhoneValid && isPasswordValid
     
     LaunchedEffect(uiState.isAuthenticated, uiState.hasProfile) {
         if (uiState.isAuthenticated) {
@@ -205,36 +210,38 @@ fun LoginScreen(viewModel: AuthViewModel = hiltViewModel()) {
                         )
                     }
                     
-                    // Login Button
-                    Button(
-                        onClick = {
-                            viewModel.login(phoneNumber.text, password)
-                        },
-                        enabled = !uiState.isLoading && phoneNumber.text.isNotBlank() && password.isNotBlank(),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFF4ECDC4),
-                            contentColor = Color.White
-                        ),
-                        shape = RoundedCornerShape(12.dp),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(56.dp)
-                            .testTag("loginButton")
-                    ) {
-                        if (uiState.isLoading) {
-                            CircularProgressIndicator(
-                                modifier = Modifier.size(20.dp),
-                                color = Color.White
-                            )
-                        } else {
-                            Text(
-                                text = "Войти",
-                                fontSize = 16.sp,
-                                fontWeight = FontWeight.Bold
-                            )
+                    // Login Button (отображается только при валидных данных)
+                    if (isFormValid) {
+                        Button(
+                            onClick = {
+                                viewModel.login(phoneNumber.text, password)
+                            },
+                            enabled = !uiState.isLoading,
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color(0xFF4ECDC4),
+                                contentColor = Color.White
+                            ),
+                            shape = RoundedCornerShape(12.dp),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(56.dp)
+                                .testTag("loginButton")
+                        ) {
+                            if (uiState.isLoading) {
+                                CircularProgressIndicator(
+                                    modifier = Modifier.size(20.dp),
+                                    color = Color.White
+                                )
+                            } else {
+                                Text(
+                                    text = "Войти",
+                                    fontSize = 16.sp,
+                                    fontWeight = FontWeight.Bold
+                                )
+                            }
                         }
                     }
-                    
+
                     Spacer(modifier = Modifier.height(16.dp))
                     
                     // Register Link

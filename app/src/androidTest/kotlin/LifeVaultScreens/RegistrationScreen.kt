@@ -15,15 +15,20 @@ class RegistrationScreen(semanticsProvider: SemanticsNodeInteractionsProvider) :
         hasText("Регистрация")
     }
 
-    val welcomeText = child<KNode> {
-        hasText("Создать аккаунт")
-    }
-
     val registerButton = child<KNode> {
         hasTestTag("registerButton")
     }
 
     val loginLink = child<KNode> {
         hasText("Уже есть аккаунт? Войти")
+    }
+    val phoneField = child<KNode> {
+        hasTestTag("phoneNumber")
+    }
+    val passwordField = child<KNode> {
+        hasTestTag("passwordField")
+    }
+    val confirmPasswordField = child<KNode> {
+        hasTestTag("confirmPasswordField")
     }
 }

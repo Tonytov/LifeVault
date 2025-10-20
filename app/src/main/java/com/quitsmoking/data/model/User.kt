@@ -75,29 +75,39 @@ object PhoneValidator {
         val cleanPhone = phone.replace(Regex("[\\s\\-\\(\\)\\+]"), "")
         return cleanPhone.matches(Regex("^[78]\\d{10}$")) // Russian phone format
     }
-    
+
+    /**
+     * Проверяет, является ли номер телефона валидным (для тестов и UI)
+     * @param phone номер телефона (может быть с форматированием)
+     * @return true если номер валиден
+     */
+    fun isValidPhone(phone: String): Boolean {
+        val digitsOnly = phone.filter { it.isDigit() }
+        return digitsOnly.length == 11 && (digitsOnly.startsWith("7") || digitsOnly.startsWith("8"))
+    }
+
     fun formatPhoneNumber(phone: String): String {
         val cleanPhone = phone.replace(Regex("[^\\d]"), "")
         return when {
-            cleanPhone.startsWith("8") && cleanPhone.length == 11 -> 
+            cleanPhone.startsWith("8") && cleanPhone.length == 11 ->
                 "+7" + cleanPhone.substring(1)
-            cleanPhone.startsWith("7") && cleanPhone.length == 11 -> 
+            cleanPhone.startsWith("7") && cleanPhone.length == 11 ->
                 "+" + cleanPhone
             else -> phone
         }
     }
-    
+
     data class PhoneInputResult(
         val formattedValue: String,
         val cursorPosition: Int
     )
-    
+
     fun formatPhoneInput(input: String, currentCursorPosition: Int = input.length): PhoneInputResult {
         val digits = input.replace(Regex("[^\\d]"), "")
-        
+
         // Ограничиваем ввод номера телефона 11 цифрами (включая код страны)
         val limitedDigits = if (digits.length > 11) digits.take(11) else digits
-        
+
         return when {
             limitedDigits.isEmpty() -> PhoneInputResult("", 0)
             limitedDigits.startsWith("9") && limitedDigits.length <= 10 -> {

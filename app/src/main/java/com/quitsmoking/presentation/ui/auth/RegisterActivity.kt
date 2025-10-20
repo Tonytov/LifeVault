@@ -152,6 +152,7 @@ fun RegisterScreen(viewModel: AuthViewModel = hiltViewModel()) {
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(bottom = 16.dp)
+                            .testTag("phoneNumber")
                     )
                     
                     // Password Field
@@ -182,6 +183,7 @@ fun RegisterScreen(viewModel: AuthViewModel = hiltViewModel()) {
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(bottom = 16.dp)
+                            .testTag("passwordField")
                     )
                     
                     // Confirm Password Field
@@ -212,6 +214,7 @@ fun RegisterScreen(viewModel: AuthViewModel = hiltViewModel()) {
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(bottom = 16.dp)
+                            .testTag("confirmPasswordField")
                     )
                     
                     // Password Requirements
