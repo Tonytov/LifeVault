@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -211,8 +212,9 @@ fun VerificationScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(bottom = 16.dp)
+                            .testTag("verificationCodeField")
                     )
-                    
+
                     // Timer or Resend Button
                     if (!canResend) {
                         Text(
@@ -245,36 +247,41 @@ fun VerificationScreen(
                             color = Color(0xFFFF6B6B),
                             style = MaterialTheme.typography.bodySmall,
                             textAlign = TextAlign.Center,
-                            modifier = Modifier.padding(bottom = 16.dp)
+                            modifier = Modifier
+                                .padding(bottom = 16.dp)
+                                .testTag("errorMessage")
                         )
                     }
-                    
-                    // Verify Button
-                    Button(
-                        onClick = {
-                            viewModel.verifyCode(phoneNumber, verificationCode)
-                        },
-                        enabled = !uiState.isLoading && verificationCode.length == 6,
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFF4ECDC4),
-                            contentColor = Color.White
-                        ),
-                        shape = RoundedCornerShape(12.dp),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(56.dp)
-                    ) {
-                        if (uiState.isLoading) {
-                            CircularProgressIndicator(
-                                modifier = Modifier.size(20.dp),
-                                color = Color.White
-                            )
-                        } else {
-                            Text(
-                                text = "Подтвердить",
-                                fontSize = 16.sp,
-                                fontWeight = FontWeight.Bold
-                            )
+
+                    // Verify Button (отображается только при валидном коде)
+                    if (verificationCode.length == 6) {
+                        Button(
+                            onClick = {
+                                viewModel.verifyCode(phoneNumber, verificationCode)
+                            },
+                            enabled = !uiState.isLoading,
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color(0xFF4ECDC4),
+                                contentColor = Color.White
+                            ),
+                            shape = RoundedCornerShape(12.dp),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(56.dp)
+                                .testTag("verifyButton")
+                        ) {
+                            if (uiState.isLoading) {
+                                CircularProgressIndicator(
+                                    modifier = Modifier.size(20.dp),
+                                    color = Color.White
+                                )
+                            } else {
+                                Text(
+                                    text = "Подтвердить",
+                                    fontSize = 16.sp,
+                                    fontWeight = FontWeight.Bold
+                                )
+                            }
                         }
                     }
                     

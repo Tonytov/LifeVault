@@ -31,4 +31,7 @@ class RegistrationScreen(semanticsProvider: SemanticsNodeInteractionsProvider) :
     val confirmPasswordField = child<KNode> {
         hasTestTag("confirmPasswordField")
     }
+    val errorMessage = child<KNode> {
+        hasTestTag("errorMessage")
+    }
 }

@@ -1,6 +1,7 @@
-package Tests
+package Tests.Login
 
 import LifeVaultScreens.LoginScreen
+import LifeVaultScreens.RegistrationScreen
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
@@ -10,7 +11,7 @@ import com.quitsmoking.presentation.ui.auth.LoginActivity
 import org.junit.Rule
 import org.junit.Test
 
-class LoginActivityNegativeTest : TestCase(
+class LoginToRegistrationNavigationTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.withComposeSupport()
 ) {
 
@@ -18,34 +19,23 @@ class LoginActivityNegativeTest : TestCase(
     val composeTestRule = createAndroidComposeRule<LoginActivity>()
 
     @Test
-    fun testLoginWithInvalidCredentials() = run {
+    fun testNavigateToRegistration() = run {
         step("Проверяем, что находимся на экране входа") {
             onComposeScreen<LoginScreen>(composeTestRule) {
                 screenTitle.assertIsDisplayed()
             }
         }
 
-        step("Вводим неверный номер телефона") {
+        step("Нажимаем на кнопку 'Нет аккаунта? Зарегистрироваться'") {
             onComposeScreen<LoginScreen>(composeTestRule) {
-                phoneField.performTextInput("+71111111111")
+                registerLink.assertIsDisplayed()
+                registerLink.performClick()
             }
         }
 
-        step("Вводим пароль") {
-            onComposeScreen<LoginScreen>(composeTestRule) {
-                passwordField.performTextInput("test1234")
-            }
-        }
-
-        step("Нажимаем кнопку Войти") {
-            onComposeScreen<LoginScreen>(composeTestRule) {
-                loginButton.performClick()
-            }
-        }
-
-        step("Проверяем отображение ошибки") {
-            onComposeScreen<LoginScreen>(composeTestRule) {
-                errorMessage.assertIsDisplayed()
+        step("Проверяем, что перешли на экран регистрации") {
+            onComposeScreen<RegistrationScreen>(composeTestRule) {
+                screenTitle.assertIsDisplayed()
             }
         }
     }

@@ -1,4 +1,4 @@
-package Tests
+package Tests.Registration
 
 import LifeVaultScreens.LoginScreen
 import LifeVaultScreens.RegistrationScreen

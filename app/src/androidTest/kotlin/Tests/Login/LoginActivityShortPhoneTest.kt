@@ -1,4 +1,4 @@
-package Tests
+package Tests.Login
 
 import LifeVaultScreens.LoginScreen
 import androidx.compose.ui.test.junit4.createAndroidComposeRule

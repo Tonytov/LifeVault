@@ -59,7 +59,13 @@ fun RegisterScreen(viewModel: AuthViewModel = hiltViewModel()) {
     var confirmPassword by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
     var confirmPasswordVisible by remember { mutableStateOf(false) }
-    
+
+    // Валидация полей
+    val isPhoneValid = PhoneValidator.isValidPhone(phoneNumber.text)
+    val isPasswordValid = password.length >= 8
+    val doPasswordsMatch = password == confirmPassword && password.isNotEmpty()
+    val isFormValid = isPhoneValid && isPasswordValid && doPasswordsMatch
+
     LaunchedEffect(uiState.isVerificationSent) {
         if (uiState.isVerificationSent) {
             val intent = Intent(context, VerificationActivity::class.java)
@@ -255,42 +261,42 @@ fun RegisterScreen(viewModel: AuthViewModel = hiltViewModel()) {
                             color = Color(0xFFFF6B6B),
                             style = MaterialTheme.typography.bodySmall,
                             textAlign = TextAlign.Center,
-                            modifier = Modifier.padding(bottom = 16.dp)
+                            modifier = Modifier
+                                .padding(bottom = 16.dp)
+                                .testTag("errorMessage")
                         )
                     }
-                    
-                    // Register Button
-                    Button(
-                        onClick = {
-                            if (password != confirmPassword) {
-                                // Handle password mismatch
-                            } else {
+
+                    // Register Button (отображается только при валидных данных)
+                    if (isFormValid) {
+                        Button(
+                            onClick = {
                                 viewModel.register(phoneNumber.text, password)
+                            },
+                            enabled = !uiState.isLoading,
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color(0xFF4ECDC4),
+                                contentColor = Color.White
+                            ),
+                            shape = RoundedCornerShape(12.dp),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(56.dp)
+                                .testTag("registerButton")
+                                .semantics { contentDescription = "registerButton" }
+                        ) {
+                            if (uiState.isLoading) {
+                                CircularProgressIndicator(
+                                    modifier = Modifier.size(20.dp),
+                                    color = Color.White
+                                )
+                            } else {
+                                Text(
+                                    text = "Зарегистрироваться",
+                                    fontSize = 16.sp,
+                                    fontWeight = FontWeight.Bold
+                                )
                             }
-                        },
-                        enabled = !uiState.isLoading && phoneNumber.text.isNotBlank() && password.isNotBlank() && confirmPassword.isNotBlank(),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFF4ECDC4),
-                            contentColor = Color.White
-                        ),
-                        shape = RoundedCornerShape(12.dp),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(56.dp)
-                            .testTag("registerButton")
-                            .semantics { contentDescription = "registerButton" }
-                    ) {
-                        if (uiState.isLoading) {
-                            CircularProgressIndicator(
-                                modifier = Modifier.size(20.dp),
-                                color = Color.White
-                            )
-                        } else {
-                            Text(
-                                text = "Зарегистрироваться",
-                                fontSize = 16.sp,
-                                fontWeight = FontWeight.Bold
-                            )
                         }
                     }
                     

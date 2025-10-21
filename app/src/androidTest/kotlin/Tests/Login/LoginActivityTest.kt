@@ -1,4 +1,4 @@
-package Tests
+package Tests.Login
 
 import Scenarios.LoginScenario
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
@@ -22,7 +22,7 @@ class LoginActivityTest : TestCase (
                 LoginScenario(
                     composeTestRule = composeTestRule,
                     phone = "79999999999",
-                    password = "11111111"
+                    password = "test1111"
                 )
             )
         }

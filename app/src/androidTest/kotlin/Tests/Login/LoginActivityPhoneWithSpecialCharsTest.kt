@@ -1,4 +1,4 @@
-package Tests
+package Tests.Login
 
 import LifeVaultScreens.LoginScreen
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
@@ -10,32 +10,29 @@ import io.github.kakaocup.compose.node.element.ComposeScreen.Companion.onCompose
 import org.junit.Rule
 import org.junit.Test
 
-class LoginActivityShortPasswordTest : TestCase(
+class LoginActivityPhoneWithSpecialCharsTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.withComposeSupport()
-) {
+){
     @get:Rule
     val composeTestRule = createAndroidComposeRule<LoginActivity>()
 
     @Test
-    fun testLoginWithShortPassword() = run {
+    fun testLoginWithSpecialCharactersInPhone() = run {
         step("Проверяем, что находимся на экране входа"){
             onComposeScreen<LoginScreen>(composeTestRule){
                 screenTitle.assertIsDisplayed()
             }
         }
-
-        step("Вводим валидный номер телефона") {
+        step("Вводим спецсимволы вместо номера телефона") {
             onComposeScreen<LoginScreen>(composeTestRule){
-                phoneField.performTextInput("79999999999")
+                phoneField.performTextInput("@@@@@@@@@")
             }
         }
-
-        step("Вводим короткий пароль"){
+        step("Вводим корректный пароль"){
             onComposeScreen<LoginScreen>(composeTestRule){
-                passwordField.performTextInput("test11")
+                passwordField.performTextInput("test1111")
             }
         }
-
         step("Проверяем, что кнопка Войти не отображается"){
             onComposeScreen<LoginScreen>(composeTestRule){
                 loginButton.assertIsNotDisplayed()
