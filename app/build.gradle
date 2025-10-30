@@ -2,16 +2,19 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.devtools.ksp'
-    id 'com.google.dagger.hilt.android'
     id 'kotlin-parcelize'
 }
 
+kotlin {
+    jvmToolchain(17)
+}
+
 android {
-    namespace 'com.quitsmoking'
+    namespace 'com.lifevault'
     compileSdk 35
 
     defaultConfig {
-        applicationId "com.quitsmoking"
+        applicationId "com.lifevault"
         minSdk 24
         targetSdk 35
         versionCode 1
@@ -30,6 +33,7 @@ android {
         }
     }
     compileOptions {
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -51,6 +55,9 @@ android {
 }
 
 dependencies {
+    // Java 8+ API desugaring support for minSdk < 26
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.4'
+
     implementation 'androidx.core:core-ktx:1.12.0'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.7.0'
     implementation 'androidx.activity:activity-compose:1.8.2'
@@ -78,18 +85,19 @@ dependencies {
     implementation "androidx.room:room-ktx:$room_version"
     ksp "androidx.room:room-compiler:$room_version"
     
-    // Hilt
-    implementation "com.google.dagger:hilt-android:$hilt_version"
-    ksp "com.google.dagger:hilt-compiler:$hilt_version"
-    implementation 'androidx.hilt:hilt-navigation-compose:1.1.0'
+    // Hilt - REMOVED (replaced with Service Locator pattern)
     
     // Gson for JSON serialization
     implementation 'com.google.code.gson:gson:2.10.1'
-    
+
+    // Retrofit for network calls
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.12.0'
+
     // WorkManager
     implementation "androidx.work:work-runtime-ktx:$work_version"
-    implementation "androidx.hilt:hilt-work:1.1.0"
-    ksp "androidx.hilt:hilt-compiler:1.1.0"
     
     // Testing
     testImplementation 'junit:junit:4.13.2'
@@ -107,8 +115,9 @@ dependencies {
     androidTestImplementation 'androidx.test:rules:1.5.0'
     androidTestImplementation platform('androidx.compose:compose-bom:2024.02.00')
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
-    androidTestImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
-    kspAndroidTest "com.google.dagger:hilt-compiler:$hilt_version"
+
+    // MockWebServer for API testing
+    androidTestImplementation 'com.squareup.okhttp3:mockwebserver:4.12.0'
     
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
@@ -118,6 +127,9 @@ dependencies {
     androidTestImplementation "com.kaspersky.android-components:kaspresso-allure-support:1.6.0"
     // Поддержка Jetpack Compose
     androidTestImplementation "com.kaspersky.android-components:kaspresso-compose-support:1.6.0"
+
+    // Kakaocup Compose для Page Object Pattern
+    androidTestImplementation "io.github.kakaocup:compose:0.4.3"
 }
 
 

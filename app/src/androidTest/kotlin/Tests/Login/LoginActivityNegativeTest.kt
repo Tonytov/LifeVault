@@ -6,7 +6,7 @@ import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.kaspersky.components.composesupport.config.withComposeSupport
 import io.github.kakaocup.compose.node.element.ComposeScreen.Companion.onComposeScreen
-import com.quitsmoking.presentation.ui.auth.LoginActivity
+import com.lifevault.presentation.ui.auth.LoginActivity
 import org.junit.Rule
 import org.junit.Test
 

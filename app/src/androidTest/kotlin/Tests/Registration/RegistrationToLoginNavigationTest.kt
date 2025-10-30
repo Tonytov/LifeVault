@@ -6,7 +6,7 @@ import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.kaspersky.components.composesupport.config.withComposeSupport
-import com.quitsmoking.presentation.ui.auth.RegisterActivity
+import com.lifevault.presentation.ui.auth.RegisterActivity
 import io.github.kakaocup.compose.node.element.ComposeScreen.Companion.onComposeScreen
 import org.junit.Rule
 import org.junit.Test

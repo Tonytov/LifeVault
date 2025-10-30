@@ -13,5 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "I'm not die"
+rootProject.name = "LifeVault"
 include ':app'
+include ':backend-ktor'
