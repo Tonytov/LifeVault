@@ -19,7 +19,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-
 class RegistrationFlowE2ETest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.withComposeSupport()
 ) {
@@ -60,7 +59,7 @@ class RegistrationFlowE2ETest : TestCase(
             )
         )
 
-        step("✅ Проверяем переход на экран верификации") {
+        step("Проверяем переход на экран верификации") {
             onComposeScreen<VerificationScreen>(composeTestRule) {
                 screenTitle.assertIsDisplayed()
             }
@@ -73,7 +72,7 @@ class RegistrationFlowE2ETest : TestCase(
             )
         )
 
-        step("✅ Проверяем переход на экран онбординга") {
+        step("Проверяем переход на экран онбординга") {
             onComposeScreen<OnboardingScreen>(composeTestRule) {
                 screenTitle.assertIsDisplayed()
             }

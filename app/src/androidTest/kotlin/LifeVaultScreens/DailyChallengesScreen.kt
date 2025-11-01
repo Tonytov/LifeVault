@@ -3,8 +3,6 @@ package LifeVaultScreens
 import androidx.compose.ui.test.SemanticsNodeInteractionsProvider
 import io.github.kakaocup.compose.node.element.ComposeScreen
 import io.github.kakaocup.compose.node.element.KNode
-import androidx.compose.ui.test.hasText
-import androidx.compose.ui.test.hasTestTag
 
 class DailyChallengesScreen(semanticsProvider: SemanticsNodeInteractionsProvider) :
     ComposeScreen<DailyChallengesScreen>(
@@ -86,11 +84,6 @@ class DailyChallengesScreen(semanticsProvider: SemanticsNodeInteractionsProvider
         hasText("📋 Доступные вызовы")
     }
 
-    // Текст "Активные вызовы"
-    val activeChallengesTitle = child<KNode> {
-        hasText("🔥 Активные вызовы")
-    }
-
     // Элементы статистики
     val statItemStreak = child<KNode> {
         hasTestTag("statItem_streak")
@@ -108,20 +101,7 @@ class DailyChallengesScreen(semanticsProvider: SemanticsNodeInteractionsProvider
         hasTestTag("statItem_earned")
     }
 
-    // Методы для работы с конкретными челленджами
-    fun challengeItem(id: Long) = child<KNode> {
-        hasTestTag("challengeItem_$id")
-    }
-
-    fun startChallengeButton(id: Long) = child<KNode> {
-        hasTestTag("startChallengeButton_$id")
-    }
-
-    fun activeChallengeCard(id: Long) = child<KNode> {
-        hasTestTag("activeChallengeCard_$id")
-    }
-
-    // Метод для проверки наличия текста челленджа (deprecated - используйте challengeItem(id) вместо этого)
+    // Метод для проверки наличия текста челленджа
     fun challengeWithText(text: String) = child<KNode> {
         hasText(text)
     }

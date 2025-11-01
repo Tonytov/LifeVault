@@ -3,8 +3,6 @@ package LifeVaultScreens
 import androidx.compose.ui.test.SemanticsNodeInteractionsProvider
 import io.github.kakaocup.compose.node.element.ComposeScreen
 import io.github.kakaocup.compose.node.element.KNode
-import androidx.compose.ui.test.hasText
-import androidx.compose.ui.test.hasTestTag
 
 class RegistrationScreen(semanticsProvider: SemanticsNodeInteractionsProvider) :
     ComposeScreen<RegistrationScreen>(
@@ -30,8 +28,5 @@ class RegistrationScreen(semanticsProvider: SemanticsNodeInteractionsProvider) :
     }
     val confirmPasswordField = child<KNode> {
         hasTestTag("confirmPasswordField")
-    }
-    val errorMessage = child<KNode> {
-        hasTestTag("errorMessage")
     }
 }

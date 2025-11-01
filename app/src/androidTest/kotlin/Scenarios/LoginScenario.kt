@@ -6,7 +6,6 @@ import com.kaspersky.kaspresso.testcases.api.scenario.Scenario
 import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
 import io.github.kakaocup.compose.node.element.ComposeScreen.Companion.onComposeScreen
 
-
 class LoginScenario(
     private val composeTestRule: ComposeTestRule,
     private val phone: String,

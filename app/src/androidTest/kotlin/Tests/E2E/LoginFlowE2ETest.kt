@@ -76,7 +76,7 @@ class LoginFlowE2ETest : TestCase(
             )
         )
 
-        step("✅ Проверяем переход на онбординг после верификации") {
+        step("Проверяем переход на онбординг после верификации") {
             onComposeScreen<OnboardingScreen>(composeTestRule) {
                 screenTitle.assertIsDisplayed()
             }
@@ -106,20 +106,5 @@ class LoginFlowE2ETest : TestCase(
                 screenTitle.assertIsDisplayed()
             }
         }
-
-        println("""
-        ✅ ===================================
-        ✅ E2E LOGIN TEST PASSED!
-        ✅ ===================================
-        ✅ Протестировано:
-        ✅ - Реальная регистрация через API
-        ✅ - Реальная верификация через API
-        ✅ - Реальный логин через API
-        ✅ - Реальная проверка пароля на бэкенде
-        ✅ - Реальная проверка статуса верификации
-        ✅ - Реальное обновление last_login_at в PostgreSQL
-        ✅ - Navigation между экранами
-        ✅ ===================================
-        """.trimIndent())
     }
 }

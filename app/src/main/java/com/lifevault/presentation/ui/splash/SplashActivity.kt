@@ -185,7 +185,7 @@ class SplashActivity : ComponentActivity() {
                     .background(
                         Brush.radialGradient(
                             colors = listOf(
-                                Color(0xFF4ECDC4).copy(alpha = glowAlpha * 0.1f),
+                                Color(0xFF4CAF50).copy(alpha = glowAlpha * 0.1f),
                                 Color.Transparent
                             ),
                             radius = 800f
@@ -216,7 +216,7 @@ class SplashActivity : ComponentActivity() {
                             .background(
                                 Brush.radialGradient(
                                     colors = listOf(
-                                        Color(0xFF4ECDC4).copy(alpha = glowAlpha * 0.3f),
+                                        Color(0xFF4CAF50).copy(alpha = glowAlpha * 0.3f),
                                         Color.Transparent
                                     )
                                 )
@@ -227,7 +227,7 @@ class SplashActivity : ComponentActivity() {
                     Card(
                         modifier = Modifier.size(140.dp),
                         colors = CardDefaults.cardColors(
-                            containerColor = Color(0xFF4ECDC4).copy(alpha = 0.2f)
+                            containerColor = Color(0xFF4CAF50).copy(alpha = 0.2f)
                         ),
                         shape = RoundedCornerShape(28.dp),
                         elevation = CardDefaults.cardElevation(defaultElevation = 16.dp)
@@ -237,7 +237,7 @@ class SplashActivity : ComponentActivity() {
                             modifier = Modifier.fillMaxSize()
                         ) {
                             Text(
-                                text = "🔒",
+                                text = "💚",
                                 fontSize = 64.sp,
                                 modifier = Modifier.padding(8.dp)
                             )
@@ -259,12 +259,12 @@ class SplashActivity : ComponentActivity() {
                 Text(
                     text = "Сохрани свою жизнь",
                     fontSize = 18.sp,
-                    color = Color(0xFF4ECDC4),
+                    color = Color(0xFF66BB6A),
                     fontWeight = FontWeight.Medium,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.padding(bottom = 12.dp)
                 )
-                
+
                 // Описание
                 Text(
                     text = "Контролируй привычки • Продлевай жизнь • Достигай целей",
@@ -274,7 +274,7 @@ class SplashActivity : ComponentActivity() {
                     lineHeight = 18.sp,
                     modifier = Modifier.padding(bottom = 64.dp)
                 )
-                
+
                 // Анимированный индикатор загрузки
                 Box(
                     contentAlignment = Alignment.Center
@@ -284,15 +284,15 @@ class SplashActivity : ComponentActivity() {
                         modifier = Modifier
                             .size(48.dp)
                             .scale(1.2f),
-                        color = Color(0xFF4ECDC4).copy(alpha = 0.3f),
+                        color = Color(0xFF4CAF50).copy(alpha = 0.3f),
                         strokeWidth = 3.dp
                     )
-                    
+
                     CircularProgressIndicator(
                         modifier = Modifier
                             .size(48.dp)
                             .scale(1.2f),
-                        color = Color(0xFF4ECDC4),
+                        color = Color(0xFF66BB6A),
                         strokeWidth = 3.dp
                     )
                 }

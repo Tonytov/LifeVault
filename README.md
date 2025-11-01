@@ -1,6 +1,6 @@
 # 🏥 LifeVault
 
-**Android-приложение для отслеживания времени жизни и мотивации к отказу от вредных привычек**
+**Учебное Android Compose приложение для отработки навыков написания автотестов на Kotlin с использованием фреймворка Kaspresso**
 
 [![Kotlin](https://img.shields.io/badge/Kotlin-1.9.22-blue.svg)](https://kotlinlang.org)
 [![Android](https://img.shields.io/badge/Android-24%2B-green.svg)](https://android.com)
@@ -164,72 +164,6 @@ adb install app/build/outputs/apk/debug/app-debug.apk
 ./gradlew :app:connectedAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=Tests.E2E.RegistrationFlowE2ETest
 ```
 
-### Архитектура тестирования
-
-**Page Object Pattern:**
-```kotlin
-object LoginScreen : ComposeScreen<LoginScreen>() {
-    val phoneField = onNode(hasTestTag("phoneField"))
-    val passwordField = onNode(hasTestTag("passwordField"))
-    val loginButton = onNode(hasTestTag("loginButton"))
-}
-```
-
-**Scenarios Pattern:**
-```kotlin
-class LoginScenario(phoneNumber, password) : Scenario() {
-    override val steps = {
-        step("Вводим номер телефона") { /* ... */ }
-        step("Вводим пароль") { /* ... */ }
-        step("Нажимаем кнопку входа") { /* ... */ }
-    }
-}
-```
-
-**Best Practices:**
-- ✅ flakySafely вместо Thread.sleep
-- ✅ Уникальные тестовые данные (TestUserGenerator)
-- ✅ Cleanup после тестов
-- ✅ Реальные E2E тесты с backend
-
----
-
-## 📐 Архитектура
-
-### MVVM + Clean Architecture
-
-```
-┌─────────────────┐
-│  Presentation   │  ViewModels + Compose UI
-├─────────────────┤
-│    Domain       │  Use Cases (опционально)
-├─────────────────┤
-│     Data        │  Repositories + API + DB
-└─────────────────┘
-```
-
-### Service Locator Pattern
-
-```kotlin
-class DependencyContainer(context, baseUrl) {
-    val database: LifeVaultDatabase by lazy { /* ... */ }
-    val authApi: AuthApi by lazy { /* ... */ }
-    val authRepository: AuthRepository by lazy { /* ... */ }
-}
-
-// Использование
-val viewModel = AuthViewModel(
-    authRepository = appContainer.authRepository,
-    lifeRepository = appContainer.lifeRepository
-)
-```
-
-**Преимущества:**
-- ✅ Простота (без DI фреймворков)
-- ✅ Прозрачность (всё явно)
-- ✅ Гибкость (легко тестировать)
-- ✅ Производительность (без кодогенерации)
-
 ---
 
 ## 🎯 Основные функции
@@ -263,16 +197,6 @@ val viewModel = AuthViewModel(
 
 ---
 
-## 🔐 Безопасность
-
-- ✅ SHA-256 хеширование паролей
-- ✅ HTTPS для production
-- ✅ Валидация на клиенте и сервере
-- ✅ Безопасное хранение токенов
-- ✅ Network Security Config
-
----
-
 ## 📊 API Endpoints
 
 ### Authentication
@@ -299,46 +223,10 @@ GET /health
 
 ---
 
-## 📖 Документация
-
-- [Backend README](backend-ktor/README.md)
-- [Testing Architecture](TESTING_ARCHITECTURE_PROPOSAL.md)
-- [Integration Guide](INTEGRATION_GUIDE.md)
-
----
-
-## 🤝 Вклад в проект
-
-1. Fork репозитория
-2. Создайте feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit изменения (`git commit -m 'Add some AmazingFeature'`)
-4. Push в branch (`git push origin feature/AmazingFeature`)
-5. Откройте Pull Request
-
----
-
-## 📝 TODO
-
-- [ ] Добавить UI тесты для всех экранов
-- [ ] Реализовать push-уведомления
-- [ ] Добавить социальные фичи
-- [ ] Dark theme
-- [ ] Multi-language support
-- [ ] Health API интеграция
-
----
-
-## 📄 License
-
-Этот проект создан в образовательных целях.
-
----
-
 ## 👨‍💻 Автор
 
-**Ваше имя**
-- GitHub: [@yourusername](https://github.com/yourusername)
-- Email: your.email@example.com
+**Tonytov**
+- Telegram: [@tov_tony](https://t.me/tov_tony)
 
 ---
 

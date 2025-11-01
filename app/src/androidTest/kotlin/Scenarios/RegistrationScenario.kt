@@ -6,12 +6,10 @@ import com.kaspersky.kaspresso.testcases.api.scenario.Scenario
 import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
 import io.github.kakaocup.compose.node.element.ComposeScreen.Companion.onComposeScreen
 
-
 class RegistrationScenario(
     private val composeTestRule: ComposeTestRule,
     private val phoneNumber: String,
     private val password: String
-
 ) : Scenario() {
     override val steps: TestContext<Unit>.() -> Unit = {
         step("Проверяем что находимся на экране регистрации") {

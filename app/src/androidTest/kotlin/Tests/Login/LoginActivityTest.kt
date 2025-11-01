@@ -9,9 +9,9 @@ import com.lifevault.presentation.ui.auth.LoginActivity
 import org.junit.Rule
 import org.junit.Test
 
-class LoginActivityTest : TestCase (
+class LoginActivityTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.withComposeSupport()
-        ){
+) {
     @get:Rule
     val composeTestRule = createAndroidComposeRule<LoginActivity>()
 
