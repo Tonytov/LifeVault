@@ -7,6 +7,7 @@ import com.lifevault.presentation.viewmodel.AuthViewModel
 import com.lifevault.presentation.viewmodel.MainViewModel
 import com.lifevault.presentation.viewmodel.OnboardingViewModel
 import com.lifevault.presentation.viewmodel.StatisticsViewModel
+import com.lifevault.presentation.viewmodel.TodayViewModel
 
 /**
  * ViewModelFactory для создания ViewModels с зависимостями из appContainer.
@@ -42,6 +43,11 @@ class ViewModelFactory(
 
             SplashViewModel::class.java -> SplashViewModel(
                 authRepository = container.authRepository,
+                lifeRepository = container.lifeRepository
+            ) as T
+
+            TodayViewModel::class.java -> TodayViewModel(
+                habitEntryDao = container.habitEntryDao,
                 lifeRepository = container.lifeRepository
             ) as T
 

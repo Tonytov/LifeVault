@@ -27,38 +27,41 @@ class MainTabsActivity : ComponentActivity() {
 }
 
 enum class MainTab(val title: String, val emoji: String) {
-    HOME("Главная", "🏠"),
-    HABITS("Привычки", "🎯"),
-    PROFILE("Профиль", "👤"),
-    ACHIEVEMENTS("Достижения", "🏆"),
-    HEALTH("Здоровье", "📚")
+    TODAY("Сегодня", "🎯"),
+    PROGRESS("Прогресс", "📊"),
+    PROFILE("Профиль", "👤")
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainTabsScreen() {
-    var selectedTab by remember { mutableStateOf(MainTab.HOME) }
-    
+    var selectedTab by remember { mutableStateOf(MainTab.TODAY) }
+
     Scaffold(
         containerColor = Color.Transparent,
         bottomBar = {
             NavigationBar(
                 containerColor = Color.Black.copy(alpha = 0.8f),
-                modifier = Modifier.height(80.dp)
+                modifier = Modifier.height(72.dp)
             ) {
                 MainTab.values().forEach { tab ->
                     NavigationBarItem(
                         icon = {
-                            Column {
+                            Column(
+                                horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
+                            ) {
                                 Text(
                                     text = tab.emoji,
-                                    fontSize = 24.sp
+                                    fontSize = 28.sp
                                 )
                                 Text(
                                     text = tab.title,
-                                    fontSize = 10.sp,
-                                    color = if (selectedTab == tab) 
-                                        Color(0xFF4ECDC4) else Color.White.copy(alpha = 0.7f)
+                                    fontSize = 11.sp,
+                                    color = if (selectedTab == tab)
+                                        Color(0xFF4ECDC4) else Color.White.copy(alpha = 0.7f),
+                                    fontWeight = if (selectedTab == tab)
+                                        androidx.compose.ui.text.font.FontWeight.Bold
+                                    else androidx.compose.ui.text.font.FontWeight.Normal
                                 )
                             }
                         },
@@ -89,11 +92,9 @@ fun MainTabsScreen() {
                 .padding(paddingValues)
         ) {
             when (selectedTab) {
-                MainTab.HOME -> HomeTab()
-                MainTab.HABITS -> HabitsTab()
+                MainTab.TODAY -> TodayScreen()
+                MainTab.PROGRESS -> ProgressScreen()
                 MainTab.PROFILE -> ProfileTab()
-                MainTab.ACHIEVEMENTS -> AchievementsTab()
-                MainTab.HEALTH -> HealthTab()
             }
         }
     }

@@ -71,6 +71,7 @@ open class DependencyContainer(
     val userProfileDao by lazy { database.userProfileDao() }
     val habitDao by lazy { database.habitDao() }
     val quitRecordDao by lazy { database.quitRecordDao() }
+    val habitEntryDao by lazy { database.habitEntryDao() }
 
     // ========== Repositories ==========
 
