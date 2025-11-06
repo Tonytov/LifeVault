@@ -10,55 +10,43 @@ import kotlin.random.Random
 object TestUserGenerator {
 
     /**
-     * Генерирует уникальный номер телефона на основе timestamp.
-     * Формат: 7XXXXXXXXXX (11 цифр, начинается с 7)
+     * Генерирует уникальный номер телефона в формате +79XXXXXXXXX.
      *
-     * Пример: 75432198765
+     * @return Номер телефона из 11 цифр: +7 9 и 9 случайных цифр
+     *
+     * Пример: +79123456789
      */
     fun generateUniquePhoneNumber(): String {
-        // Используем timestamp для уникальности
-        val timestamp = System.currentTimeMillis() % 9000000000 + 1000000000
-        return "7$timestamp"
+        // Генерируем 9 случайных цифр
+        val randomDigits = (1..9).joinToString("") { Random.nextInt(0, 10).toString() }
+        return "+79$randomDigits"
     }
 
     /**
-     * Генерирует уникальный номер телефона с префиксом для удобства отладки.
+     * Генерирует уникальный пароль длиной 8 символов.
+     * Гарантированно содержит минимум одну цифру.
      *
-     * @param prefix Префикс для идентификации теста (например, "login", "reg")
-     * @return Номер телефона формата 7XXXXXXXXXX
+     * @return Пароль длиной 8 символов
+     *
+     * Пример: aB3d5Fg8
      */
-    fun generatePhoneNumberWithPrefix(prefix: String = ""): String {
-        val baseNumber = System.currentTimeMillis() % 900000000 + 100000000
-        return "7${prefix.take(1)}$baseNumber"
-    }
+    fun generateUniquePassword(): String {
+        val letters = ('a'..'z') + ('A'..'Z')
+        val digits = ('0'..'9')
 
-    /**
-     * Генерирует случайный номер телефона для негативных тестов.
-     */
-    fun generateRandomPhoneNumber(): String {
-        val random = Random.nextLong(1000000000, 9999999999)
-        return "7$random"
-    }
+        // Генерируем пароль: минимум 1 цифра + 7 остальных символов
+        val password = buildString {
+            // Добавляем хотя бы одну цифру
+            append(digits.random())
 
-    /**
-     * Стандартный тестовый пароль.
-     */
-    const val DEFAULT_TEST_PASSWORD = "test1111"
+            // Добавляем оставшиеся 7 символов из букв и цифр
+            val allChars = letters + digits
+            repeat(7) {
+                append(allChars.random())
+            }
+        }
 
-    /**
-     * Генерирует уникальный email (опционально для будущего).
-     */
-    fun generateUniqueEmail(): String {
-        val timestamp = System.currentTimeMillis()
-        return "test_$timestamp@lifevault.test"
-    }
-
-    /**
-     * Генерирует тестовое имя пользователя.
-     */
-    fun generateUserName(): String {
-        val names = listOf("Иван", "Петр", "Мария", "Анна", "Алексей")
-        val surnames = listOf("Иванов", "Петров", "Сидоров", "Козлов", "Смирнов")
-        return "${names.random()} ${surnames.random()}"
+        // Перемешиваем символы, чтобы цифра не всегда была первой
+        return password.toList().shuffled().joinToString("")
     }
 }

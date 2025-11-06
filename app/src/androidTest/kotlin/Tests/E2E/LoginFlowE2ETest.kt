@@ -29,7 +29,7 @@ class LoginFlowE2ETest : TestCase(
     private lateinit var e2eConfig: RealE2ETestConfig
 
     private val testPhoneNumber = TestUserGenerator.generateUniquePhoneNumber()
-    private val testPassword = TestUserGenerator.DEFAULT_TEST_PASSWORD
+    private val testPassword = TestUserGenerator.generateUniquePassword()
 
     @Before
     fun setUp() {
@@ -53,15 +53,13 @@ class LoginFlowE2ETest : TestCase(
     @Test
     fun testLoginFlowForUserWithoutProfile() = run {
 
-        step("Регистрируем пользователя") {
-            scenario(
-                RegistrationScenario(
-                    composeTestRule = composeTestRule,
-                    phoneNumber = testPhoneNumber,
-                    password = testPassword
-                )
+        scenario(
+            RegistrationScenario(
+                composeTestRule = composeTestRule,
+                phoneNumber = testPhoneNumber,
+                password = testPassword
             )
-        }
+        )
 
         step("Проверяем переход на экран верификации") {
             onComposeScreen<VerificationScreen>(composeTestRule) {

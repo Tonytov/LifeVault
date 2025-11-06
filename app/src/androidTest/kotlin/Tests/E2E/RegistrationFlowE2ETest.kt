@@ -28,7 +28,7 @@ class RegistrationFlowE2ETest : TestCase(
     private lateinit var e2eConfig: RealE2ETestConfig
 
     private val testPhoneNumber = TestUserGenerator.generateUniquePhoneNumber()
-    private val testPassword = TestUserGenerator.DEFAULT_TEST_PASSWORD
+    private val testPassword = TestUserGenerator.generateUniquePassword()
 
     @Before
     fun setUp() {
