@@ -1,0 +1,35 @@
+name: "LifeVault Android Tests"
+outputDir: "marathon-results"
+analyticsTracking: false
+
+# Vendor configuration for Android
+vendorConfiguration:
+  type: "Android"
+  androidSdk: "/Users/anton/Library/Android/sdk"
+  applicationApk: "app/build/outputs/apk/debug/app-debug.apk"
+  testApplicationApk: "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk"
+  autoGrantPermission: true
+
+  # Настройка записи видео (по умолчанию только для упавших тестов)
+  screenRecordConfiguration:
+    preferableRecorderType: "video"
+    videoConfiguration:
+      enabled: true
+      width: 720
+      height: 1280
+      bitrateMbps: 2
+      timeLimit: 300
+
+# Стратегия распределения тестов
+poolingStrategy:
+  type: "omni"
+
+# Стратегия шардирования
+shardingStrategy:
+  type: "parallel"
+
+# Стратегия retry для flaky тестов
+retryStrategy:
+  type: "fixed-quota"
+  totalAllowedRetryQuota: 100
+  retryPerTestQuota: 3

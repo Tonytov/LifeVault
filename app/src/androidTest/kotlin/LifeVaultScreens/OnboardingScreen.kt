@@ -12,4 +12,36 @@ class OnboardingScreen(semanticsProvider: SemanticsNodeInteractionsProvider) :
     val screenTitle = child<KNode> {
         hasTestTag("onboardingTitle")
     }
+
+    val nameField = child<KNode> {
+        hasTestTag("nameField")
+    }
+
+    val genderMale = child<KNode> {
+        hasTestTag("genderMALE")
+    }
+
+    val genderFemale = child<KNode> {
+        hasTestTag("genderFEMALE")
+    }
+
+    val ageField = child<KNode> {
+        hasTestTag("ageField")
+    }
+
+    val heightField = child<KNode> {
+        hasTestTag("heightField")
+    }
+
+    val weightField = child<KNode> {
+        hasTestTag("weightField")
+    }
+
+    val regionField = child<KNode> {
+        hasTestTag("regionField")
+    }
+
+    val calculateLifeButton = child<KNode> {
+        hasTestTag("calculateLifeButton")
+    }
 }

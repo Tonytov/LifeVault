@@ -171,7 +171,9 @@ fun OnboardingScreen(viewModel: OnboardingViewModel = viewModel(factory = ViewMo
                         value = fullName,
                         onValueChange = { if (it.length <= 50) fullName = it },
                         label = { Text("Ваше имя") },
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .testTag("nameField"),
                         singleLine = true
                     )
                     
@@ -185,7 +187,7 @@ fun OnboardingScreen(viewModel: OnboardingViewModel = viewModel(factory = ViewMo
                             .fillMaxWidth()
                             .padding(bottom = 8.dp)
                     )
-                    
+
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -193,11 +195,13 @@ fun OnboardingScreen(viewModel: OnboardingViewModel = viewModel(factory = ViewMo
                         Gender.values().forEach { gender ->
                             FilterChip(
                                 onClick = { selectedGender = gender },
-                                label = { 
-                                    Text(if (gender == Gender.MALE) "Male" else "Female") 
+                                label = {
+                                    Text(if (gender == Gender.MALE) "Male" else "Female")
                                 },
                                 selected = selectedGender == gender,
-                                modifier = Modifier.weight(1f)
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .testTag("gender${gender.name}")
                             )
                         }
                     }
@@ -210,7 +214,9 @@ fun OnboardingScreen(viewModel: OnboardingViewModel = viewModel(factory = ViewMo
                         onValueChange = { if (it.all { char -> char.isDigit() } && it.length <= 3) age = it },
                         label = { Text("Age") },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .testTag("ageField")
                     )
                     
                     Spacer(modifier = Modifier.height(16.dp))
@@ -224,15 +230,19 @@ fun OnboardingScreen(viewModel: OnboardingViewModel = viewModel(factory = ViewMo
                             onValueChange = { if (it.all { char -> char.isDigit() } && it.length <= 3) height = it },
                             label = { Text("Height (cm)") },
                             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                            modifier = Modifier.weight(1f)
+                            modifier = Modifier
+                                .weight(1f)
+                                .testTag("heightField")
                         )
-                        
+
                         OutlinedTextField(
                             value = weight,
                             onValueChange = { if (it.all { char -> char.isDigit() } && it.length <= 3) weight = it },
                             label = { Text("Weight (kg)") },
                             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                            modifier = Modifier.weight(1f)
+                            modifier = Modifier
+                                .weight(1f)
+                                .testTag("weightField")
                         )
                     }
                     
@@ -262,6 +272,7 @@ fun OnboardingScreen(viewModel: OnboardingViewModel = viewModel(factory = ViewMo
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .menuAnchor()
+                                .testTag("regionField")
                         )
                         
                         ExposedDropdownMenu(
